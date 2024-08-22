@@ -1,0 +1,28 @@
+Ambulante:
+    - Nome_Completo
+    - CPF
+    - Raca
+    - Municipio_reside
+    - Bairro(Se for Salvador)
+    - Rua
+    - DDD_celular
+    - telefone_celular
+    - DDD_whatsapp
+    - telefone_whatsapp
+    - RG (Identidade)
+    - Escolaridade
+    - Atividade_Equipamento
+    - Ajudante(quantidade)
+    - Dados_Ajudante(Se tiver ajudante)
+    - Autoriza dados para pesquisa?
+    - Aceito?
+    - Hora da última modificação
+     
+    Métodos:
+    - Conferir CPF
+    - Conferir RG
+    - Conferir se é de Salvador(para informar o bairro)
+    - Conferir se há ajudante
+    - pegar a última hora de modificaçãp
+    - 
+    
