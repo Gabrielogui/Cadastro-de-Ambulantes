@@ -164,7 +164,8 @@ class View():
         self.lb_atividades = tk.Label(self.frame_02, text='Atividades', bg='#dfe3ee')
         self.lb_atividades.place(relx=0.32, rely=0.25)
 
-        self.atividade_optionMenu = tk.OptionMenu(self.frame_02, self.atividade_selecao, *self.opcoes_atividades)
+        self.atividade_optionMenu = tk.OptionMenu(self.frame_02, self.atividade_selecao, *self.opcoes_atividades, command=self.frame02_atualizaAjudante)
+        #self.atividade_optionMenu.bind('<1>', lambda e: self.atividade_selecao.set(self.opcoes_atividades[0]))
         self.atividade_optionMenu.place(relx=0.32, rely=0.3)
 
         # LABEL E LISTA DE OPÇÕES DA RAÇA (BRANCA, PRETA, PARDA, INDÍGENA E AMARELA)
@@ -201,9 +202,11 @@ class View():
         self.possuiDeficiencia_optionMenu.place(relx=0.65, rely=0.3)
 
         # LABEL E LISTA DE OPÇÕES ESCOLARIDADE (EDUCAÇÃO INFANTIL, FUNDAMENTAL I, FUNDAMENTAL II, ENSINO MÉDIO, SUPERIOR, PÓS-GRADUAÇÃO)
-        self.opcoes_escolaridades = ['Homem', 'Mulher', 'Prefiro não identificar']
+        self.opcoes_escolaridades = ['Fundamental I incompleto', 'Fundamental I completo', 'Fundamental II incompleto', 'Fundamental I completo',
+                                     'Ensino Médio incompleto', 'Ensino Médio completo', 'Ensino Superior incompleto', 'Ensino Superior completo',
+                                     'Pós Graduação incompleto', 'Pós Graduação incompleto']
         self.escolaridade_selecao = tk.StringVar(self.frame_02)
-        self.escolaridade_selecao.set('Escolha a escolaridade') # Pode colocar também a primeira opção 'self.opcoes_escolaridades[0]'
+        self.escolaridade_selecao.set('Escolha') # Pode colocar também a primeira opção 'self.opcoes_escolaridades[0]'
 
         self.lb_escolaridades = tk.Label(self.frame_02, text='Escolaridade', bg='#dfe3ee')
         self.lb_escolaridades.place(relx=0.74, rely=0.25)
@@ -212,11 +215,59 @@ class View():
         self.escolaridade_optionMenu.place(relx=0.74, rely=0.3)
 
         # LABEL E LISTA DE OPÇÕES SE TRABALHA (SIM OU NÃO)
+        self.opcoes_possuiTrabalho = ['Não', 'Sim']
+        self.possuiTrabalho_selecao = tk.StringVar(self.frame_02)
+        self.possuiTrabalho_selecao.set(self.opcoes_possuiTrabalho[0]) # Pode colocar também a primeira opção 'self.opcoes_possuiTrabalho[0]'
+
+        self.lb_possuiTrabalho = tk.Label(self.frame_02, text='Possui trabalho?', bg='#dfe3ee')
+        self.lb_possuiTrabalho.place(relx=0.83, rely=0.25)
+
+        self.possuiTrabalho_optionMenu = tk.OptionMenu(self.frame_02, self.possuiTrabalho_selecao, *self.opcoes_possuiTrabalho)
+        self.possuiTrabalho_optionMenu.place(relx=0.83, rely=0.3)
 
         # LABEL E LISTA DE OPÇÕES DA FAIXA SALARIAL (MENOS DE 1000, ENTRE 1000 E 2000, ENTRE 2000 E 3000, ETC...)
+        self.opcoes_faixaSalariais = ['-1000', '1000-2000', '2000-3000', '3000-4000', '4000-']
+        self.faixaSalarial_selecao = tk.StringVar(self.frame_02)
+        self.faixaSalarial_selecao.set('Escolha') # Pode colocar também a primeira opção 'self.opcoes_faixaSalariais[0]'
+
+        self.lb_faixaSalariais = tk.Label(self.frame_02, text='Faixa Salarial', bg='#dfe3ee')
+        self.lb_faixaSalariais.place(relx=0.92, rely=0.25)
+
+        self.faixaSalarial_optionMenu = tk.OptionMenu(self.frame_02, self.faixaSalarial_selecao, *self.opcoes_faixaSalariais)
+        self.faixaSalarial_optionMenu.place(relx=0.92, rely=0.3)
 
         # ======= LABEL, ENTRY E LISTA DE OPÇÕES DOS AJUDAENTES (INFOMAÇÕES DO AJUDANTE PERANTE A ATIVIDADE ESCOLHIDA) =======
 
+
+    def frame02_atualizaAjudante(self, atividade_selecao):
+        print(f'-> {atividade_selecao} <-')
+
+        qtdeAjudante = 0
+        if(self.atividade_selecao.get() == 'Ambulante'):
+            qtdeAjudante = 1
+        elif(self.atividade_selecao.get() == 'Barraqueiro'):
+            qtdeAjudante = 3
+        elif(self.atividade_selecao.get() == 'Carrinho de Alimentação'):
+            qtdeAjudante = 1
+        elif(self.atividade_selecao.get() == 'Baiana de Acarajé'):
+            qtdeAjudante = 2
+        elif(self.atividade_selecao.get() == 'Baleiro'):
+            qtdeAjudante = 0
+        else:
+            return
+        
+        self.opcoes_ajudantes = []
+        for numAjudantes in range(qtdeAjudante + 1):
+            self.opcoes_ajudantes.append(numAjudantes)
+
+        self.ajudante_selecao = tk.StringVar(self.frame_02)
+        self.ajudante_selecao.set(self.opcoes_ajudantes[0]) # Pode colocar também a primeira opção 'self.opcoes_ajudantes[0]'
+
+        self.lb_ajudantes = tk.Label(self.frame_02, text='ajudantes', bg='#dfe3ee')
+        self.lb_ajudantes.place(relx=0.05, rely=0.38)
+
+        self.ajudante_optionMenu = tk.OptionMenu(self.frame_02, self.ajudante_selecao, *self.opcoes_ajudantes)
+        self.ajudante_optionMenu.place(relx=0.05, rely=0.43)
 
     # ======= FRAME 03 (TREEVIEW DOS CADASTRADOS) =======
     def frame03(self):
