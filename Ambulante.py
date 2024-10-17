@@ -1,4 +1,4 @@
-# ======= CLASSE AMBULANTE =======
+# |=======| CLASSE AMBULANTE |=======|
 class Ambulante():
     # ======= CONSTRUTOR =======
     def __init__(self):
@@ -22,9 +22,10 @@ class Ambulante():
 
     # ======= MÉTODOS =======
 
-# ======= CLASSE AJUDANTE =======
+# |=======| CLASSE AJUDANTE |=======|
 class Ajudante():
     def __init__(self):
-        self.nome = None
-        self.cpf  = None
+        self.nome           = None
+        self.cpf            = None
+        self.dataNascimento = None
 

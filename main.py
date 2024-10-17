@@ -27,7 +27,6 @@ class View():
         self.janela.attributes('-fullscreen', True)
         self.janela.resizable(False, False)
         
-    
     # ======= FRAMES DA TELA PRINCIPAL =======
     def frames_da_tela(self):
         # FRAME 01 - FRAME LATERAL (MENU DO USUÁRIO)
@@ -235,15 +234,9 @@ class View():
 
         self.faixaSalarial_optionMenu = tk.OptionMenu(self.frame_02, self.faixaSalarial_selecao, *self.opcoes_faixaSalariais)
         self.faixaSalarial_optionMenu.place(relx=0.92, rely=0.3)
-
-        # ======= LABEL, ENTRY E LISTA DE OPÇÕES DOS AJUDAENTES (INFOMAÇÕES DO AJUDANTE PERANTE A ATIVIDADE ESCOLHIDA) =======
-
-        
-
-        
-       
-
-
+    
+    # ======= LABEL, ENTRY E LISTA DE OPÇÕES DOS AJUDAENTES (INFOMAÇÕES DO AJUDANTE PERANTE A ATIVIDADE ESCOLHIDA) =======
+    # CRIAÇÃO DO 'OPTIONMENU' DA QUANTIDADE DE AJUDANTES 
     def frame02_atualizaAjudante(self, atividade_selecao):
         print(f'-> {atividade_selecao}, {self.atividade_selecao.get()} <-')
 
@@ -276,8 +269,10 @@ class View():
         self.ajudante_optionMenu = tk.OptionMenu(self.frame_02, self.ajudante_selecao, *self.opcoes_ajudantes, command=self.frame02_criandoCamposAjudantes)
         self.ajudante_optionMenu.place(relx=0.05, rely=0.43)
 
+    # CRIAÇÃO DOS CAMPOS PARA AJUDANTES 
     def frame02_criandoCamposAjudantes(self, ajudante_selecao):
         
+        # EXCLUINDO OS CAMPOS DOS AJUDANTES JÁ EXISTENTES
         if(hasattr(self, 'campos_ajudantes')):
             for campos in self.campos_ajudantes:
                 campos.destroy()
@@ -376,11 +371,6 @@ class View():
             if((int(self.ajudante_selecao.get()) != 1) and (int(self.ajudante_selecao.get()) != 2) and (int(self.ajudante_selecao.get()) != 3)):
                 messagebox.showerror('[ERRO] - Número de ajudantes', 'Não é possível ter mais de três ajudantes!')
                 return
-
-        
-        
-
-
 
     # ======= FRAME 03 (TREEVIEW DOS CADASTRADOS) =======
     def frame03(self):
