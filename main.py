@@ -238,10 +238,16 @@ class View():
 
         # ======= LABEL, ENTRY E LISTA DE OPÇÕES DOS AJUDAENTES (INFOMAÇÕES DO AJUDANTE PERANTE A ATIVIDADE ESCOLHIDA) =======
 
+        
+
+        
+       
+
 
     def frame02_atualizaAjudante(self, atividade_selecao):
-        print(f'-> {atividade_selecao} <-')
+        print(f'-> {atividade_selecao}, {self.atividade_selecao.get()} <-')
 
+        # NÚMERO DE AJUDANDTES POSSÍVEIS DE CADA ATIVIDADE
         qtdeAjudante = 0
         if(self.atividade_selecao.get() == 'Ambulante'):
             qtdeAjudante = 1
@@ -256,6 +262,7 @@ class View():
         else:
             return
         
+        # LABEL E LISTA DE OPÇÕES DO NÚMERO DE AJUDADNTES
         self.opcoes_ajudantes = []
         for numAjudantes in range(qtdeAjudante + 1):
             self.opcoes_ajudantes.append(numAjudantes)
@@ -266,8 +273,114 @@ class View():
         self.lb_ajudantes = tk.Label(self.frame_02, text='ajudantes', bg='#dfe3ee')
         self.lb_ajudantes.place(relx=0.05, rely=0.38)
 
-        self.ajudante_optionMenu = tk.OptionMenu(self.frame_02, self.ajudante_selecao, *self.opcoes_ajudantes)
+        self.ajudante_optionMenu = tk.OptionMenu(self.frame_02, self.ajudante_selecao, *self.opcoes_ajudantes, command=self.frame02_criandoCamposAjudantes)
         self.ajudante_optionMenu.place(relx=0.05, rely=0.43)
+
+    def frame02_criandoCamposAjudantes(self, ajudante_selecao):
+        
+        if(hasattr(self, 'campos_ajudantes')):
+            for campos in self.campos_ajudantes:
+                campos.destroy()
+
+        self.campos_ajudantes = []
+
+        print(f'<<< {self.ajudante_selecao.get()} >>>')
+        # ======= LABELS E ENTRYS DOS AJUDANTES =======
+        for i in range(int(self.ajudante_selecao.get())):
+            if(int(self.ajudante_selecao.get()) == 0):
+                return
+            if((int(self.ajudante_selecao.get()) == 1) or (int(self.ajudante_selecao.get()) == 2) or (int(self.ajudante_selecao.get()) == 3)):
+                # AJUDANTE 01
+                # NOME:
+                self.lb_nomeAjudante01 = tk.Label(self.frame_02, text='Nome do ajudante 01', bg='#dfe3ee')
+                self.lb_nomeAjudante01.place(relx=0.01, rely=0.55)
+                self.campos_ajudantes.append(self.lb_nomeAjudante01)
+
+                self.nomeAjudante01_entry = tk.Entry(self.frame_02)
+                self.nomeAjudante01_entry.place(relx=0.01, rely=0.6, relwidth=0.2)  
+                self.campos_ajudantes.append(self.nomeAjudante01_entry)
+
+                # CPF:
+                self.lb_cpfAjudante01 = tk.Label(self.frame_02, text='CPF do ajudante 01', bg='#dfe3ee')
+                self.lb_cpfAjudante01.place(relx=0.01, rely=0.65)
+                self.campos_ajudantes.append(self.lb_cpfAjudante01)
+
+                self.cpfAjudante01_entry = tk.Entry(self.frame_02)
+                self.cpfAjudante01_entry.place(relx=0.01, rely=0.7, relwidth=0.09) 
+                self.campos_ajudantes.append(self.cpfAjudante01_entry) 
+
+                # DATA DE NASCIMENTO:
+                self.lb_dataNascimentoAjudante01 = tk.Label(self.frame_02, text='Data de nascimento', bg='#dfe3ee')
+                self.lb_dataNascimentoAjudante01.place(relx=0.12, rely=0.65)
+                self.campos_ajudantes.append(self.lb_dataNascimentoAjudante01)
+
+                self.dataNascimentoAjudante01_entry = tk.Entry(self.frame_02)
+                self.dataNascimentoAjudante01_entry.place(relx=0.12, rely=0.7, relwidth=0.09) 
+                self.campos_ajudantes.append(self.dataNascimentoAjudante01_entry)
+            if((int(self.ajudante_selecao.get()) == 2) or (int(self.ajudante_selecao.get()) == 3)):
+                # AJUDANTE 02
+                # NOME:
+                self.lb_nomeAjudante02 = tk.Label(self.frame_02, text='Nome do ajudante 02', bg='#dfe3ee')
+                self.lb_nomeAjudante02.place(relx=0.31, rely=0.55)
+                self.campos_ajudantes.append(self.lb_nomeAjudante02)
+
+                self.nomeAjudante02_entry = tk.Entry(self.frame_02)
+                self.nomeAjudante02_entry.place(relx=0.31, rely=0.6, relwidth=0.2)
+                self.campos_ajudantes.append(self.nomeAjudante02_entry)
+
+                # CPF:
+                self.lb_cpfAjudante02 = tk.Label(self.frame_02, text='CPF do ajudante 02', bg='#dfe3ee')
+                self.lb_cpfAjudante02.place(relx=0.31, rely=0.65)
+                self.campos_ajudantes.append(self.lb_cpfAjudante02)
+
+                self.cpfAjudante02_entry = tk.Entry(self.frame_02)
+                self.cpfAjudante02_entry.place(relx=0.31, rely=0.7, relwidth=0.09)  
+                self.campos_ajudantes.append(self.cpfAjudante02_entry)
+
+                # DATA DE NASCIMENTO:
+                self.lb_dataNascimentoAjudante02 = tk.Label(self.frame_02, text='Data de nascimento', bg='#dfe3ee')
+                self.lb_dataNascimentoAjudante02.place(relx=0.42, rely=0.65)
+                self.campos_ajudantes.append(self.lb_dataNascimentoAjudante02)
+
+                self.dataNascimentoAjudante02_entry = tk.Entry(self.frame_02)
+                self.dataNascimentoAjudante02_entry.place(relx=0.42, rely=0.7, relwidth=0.09)
+                self.campos_ajudantes.append(self.dataNascimentoAjudante02_entry)
+            if(int(self.ajudante_selecao.get()) == 3):
+                # --- AJUDANTE 03 ---
+                # NOME:
+                self.lb_nomeAjudante03 = tk.Label(self.frame_02, text='Nome do ajudante 03', bg='#dfe3ee')
+                self.lb_nomeAjudante03.place(relx=0.61, rely=0.55)
+                self.campos_ajudantes.append(self.lb_nomeAjudante03)
+
+                self.nomeAjudante03_entry = tk.Entry(self.frame_02)
+                self.nomeAjudante03_entry.place(relx=0.61, rely=0.6, relwidth=0.2)   
+                self.campos_ajudantes.append(self.nomeAjudante03_entry)
+
+                # CPF:
+                self.lb_cpfAjudante03 = tk.Label(self.frame_02, text='CPF do ajudante 03', bg='#dfe3ee')
+                self.lb_cpfAjudante03.place(relx=0.61, rely=0.65)
+                self.campos_ajudantes.append(self.lb_cpfAjudante03)
+
+                self.cpfAjudante03_entry = tk.Entry(self.frame_02)
+                self.cpfAjudante03_entry.place(relx=0.61, rely=0.7, relwidth=0.09) 
+                self.campos_ajudantes.append(self.cpfAjudante03_entry) 
+
+                # DATA DE NASCIMENTO:
+                self.lb_dataNascimentoAjudante03 = tk.Label(self.frame_02, text='Data de nascimento', bg='#dfe3ee')
+                self.lb_dataNascimentoAjudante03.place(relx=0.72, rely=0.65)
+                self.campos_ajudantes.append(self.lb_dataNascimentoAjudante03)
+
+                self.dataNascimentoAjudante03_entry = tk.Entry(self.frame_02)
+                self.dataNascimentoAjudante03_entry.place(relx=0.72, rely=0.7, relwidth=0.09) 
+                self.campos_ajudantes.append(self.dataNascimentoAjudante03_entry)
+            if((int(self.ajudante_selecao.get()) != 1) and (int(self.ajudante_selecao.get()) != 2) and (int(self.ajudante_selecao.get()) != 3)):
+                messagebox.showerror('[ERRO] - Número de ajudantes', 'Não é possível ter mais de três ajudantes!')
+                return
+
+        
+        
+
+
 
     # ======= FRAME 03 (TREEVIEW DOS CADASTRADOS) =======
     def frame03(self):
