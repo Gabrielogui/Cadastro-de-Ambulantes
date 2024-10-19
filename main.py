@@ -1,13 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
 
+from controle import Controle
 from Ambulante import Ambulante
+
 
 # |=======| JANELAS PRINCIPAIS |=======|
 janela = tk.Tk()
 
-# |=======| View |=======|
-class View():
+# |=======| VIEW |=======|
+class View(Controle):
     # ======= Construtor =======
     def __init__(self):
         self.janela = janela
@@ -49,7 +51,7 @@ class View():
     def frame02(self):
         # ======= BOTÕES =======
         # BOTÃO LIMPAR:
-        self.bt_limpar  = tk.Button(self.frame_02, text='Limpar', bd=2, bg='#3e557a', fg='white', font=('verdano', 0, 'bold'))
+        self.bt_limpar  = tk.Button(self.frame_02, text='Limpar', bd=2, bg='#3e557a', fg='white', font=('verdano', 0, 'bold'), command=self.limpa_tela)
         self.bt_limpar.place(relx=0.12, rely=0.02, relwidth=0.05, relheight=0.1)
 
         # BOTÃO BUSCAR
