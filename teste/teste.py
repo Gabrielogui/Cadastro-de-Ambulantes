@@ -1,5 +1,5 @@
 import tkinter as tk
-from Ambulante import Ambulante
+from src.modelo.Ambulante import Ambulante
 from tkinter import messagebox
 
 # |=======| FUNÇÕES |=======|

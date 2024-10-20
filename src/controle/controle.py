@@ -1,9 +1,10 @@
 import tkinter as tk
 
-from Ambulante import *
+from src.modelo.Ambulante import *
 
 # |=======| CONTROLE |=======|
 class Controle():
+    # ======= MÉTODO LIMPAR TELA (LIMPA OS ENTRYS DO FRAME 02) =======
     def limpa_tela(self):
         self.id_entry.delete(0, tk.END)
         self.nome_entry.delete(0, tk.END)

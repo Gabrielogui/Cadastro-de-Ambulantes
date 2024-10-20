@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 
-from controle import Controle
-from Ambulante import Ambulante
+from src.controle.controle import Controle
+from src.modelo.Ambulante import Ambulante
 
 
 # |=======| JANELAS PRINCIPAIS |=======|
