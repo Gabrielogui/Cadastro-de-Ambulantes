@@ -3,7 +3,7 @@ from tkinter import messagebox
 
 from src.controle.controle import Controle
 from src.modelo.Ambulante import Ambulante
-
+from src.view.loginView import LoginView
 
 # |=======| JANELAS PRINCIPAIS |=======|
 janela = tk.Tk()
@@ -403,5 +403,6 @@ class View(Controle):
 
         # MENU 03 - RELATÓRIOS
 
-
-View()
+if __name__ == '__main__':
+    LoginView()
+    View()
