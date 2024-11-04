@@ -2,10 +2,13 @@
 class Ambulante():
     # ======= CONSTRUTOR =======
     def __init__(self):
+        self.id           = None
         self.nome         = None
         self.cpf          = None
+        self.email        = None
         self.raca         = None
-        self.municipio    = None
+        self.cep          = None
+        self.cidade       = None
         self.bairro       = None
         self.rua          = None
         self.ddd_celular  = None

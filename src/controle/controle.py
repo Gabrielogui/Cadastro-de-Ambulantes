@@ -1,4 +1,5 @@
 import tkinter as tk
+import sqlite3
 
 from src.modelo.Ambulante import *
 
@@ -19,3 +20,22 @@ class Controle():
         self.nomeMae_entry.delete(0, tk.END)
         self.dataNascimento_entry.delete(0, tk.END)
         
+    def conecta_bd(self):
+        self.conn = sqlite3.connect('cadastro_ambulante.bd')
+        self.cursor = self.conn.cursor()
+        print('conectando ao banco de dados !')
+
+    def desconecta_bd(self):
+        self.conn.close()
+        print('desconectando do banco de dados!')
+
+    def montar_tabelas(self):
+        self.conecta_bd()
+
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS ambulante(
+                id INTEGER PRIMARY KEY,
+                nome char(50) NOT NULL,
+                
+                )
+        ''')

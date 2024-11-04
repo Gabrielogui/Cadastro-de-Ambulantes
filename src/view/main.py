@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 
 from src.controle.controle import Controle
@@ -45,6 +46,13 @@ class View(Controle):
 
     # ======= FRAME 01 (MENU DO USUÁRIO) =======
     def frame01(self):
+        '''
+        - LOGO
+        - PESSOA LOGADA(NOME)
+        - OPÇÃO PARA DESLOGAR
+        - ESCOLHA DAS ATIVIDADES
+        - NÚMERO DE CADASTRADOS - TOTAL E POR ATIVIDADE
+        '''
         pass
     
     # ======= FRAME 02 (WIDGETS DO CADASTRO) =======
@@ -376,7 +384,45 @@ class View(Controle):
 
     # ======= FRAME 03 (TREEVIEW DOS CADASTRADOS) =======
     def frame03(self):
-        pass
+        # ======= BOTÕES =======
+
+        # ======= LISTA DOS CADASTRADOS - TREEVIEW =======
+        self.listaAmbulantes = ttk.Treeview(self.frame_03, height=6, columns=('col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7', 'col8', 'col9', 'col10', 'col11', 'col', ''))
+
+        # TÍTULOS DA LISTA - TREEVIEW
+        self.listaAmbulantes.heading('#0', text='')
+        self.listaAmbulantes.heading('#1', text='Código')
+        self.listaAmbulantes.heading('#2', text='Nome')
+        self.listaAmbulantes.heading('#3', text='CPF')
+        self.listaAmbulantes.heading('#4', text='RG')
+        self.listaAmbulantes.heading('#5', text='Telefone')
+        self.listaAmbulantes.heading('#6', text='Email')
+        self.listaAmbulantes.heading('#7', text='CEP')
+        self.listaAmbulantes.heading('#8', text='Cidade')
+        self.listaAmbulantes.heading('#9', text='Bairro')
+        self.listaAmbulantes.heading('#10', text='Rua')
+        self.listaAmbulantes.heading('#11', text='Nome da mãe')
+        self.listaAmbulantes.heading('#12', text='Atividade')
+        self.listaAmbulantes.heading('#13', text='Raça')
+
+        # TAMANHO DOS TÍTULOS DA LISTA - TREEVIEW
+        self.listaAmbulantes.column('#0', width=1)
+        self.listaAmbulantes.column('#1', width=50)
+        self.listaAmbulantes.column('#2', width=200)
+        self.listaAmbulantes.column('#3', width=100)
+        self.listaAmbulantes.column('#4', width=100)
+        self.listaAmbulantes.column('#5', width=100)
+        self.listaAmbulantes.column('#6', width=100)
+        self.listaAmbulantes.column('#7', width=100)
+        self.listaAmbulantes.column('#8', width=100)
+        self.listaAmbulantes.column('#9', width=100)
+        self.listaAmbulantes.column('#10', width=100)
+        self.listaAmbulantes.column('#11', width=200)
+        self.listaAmbulantes.column('#12', width=100)
+        self.listaAmbulantes.column('#13', width=100)
+
+        # POSICIONANDO A LISTA - TREEVIEW
+        self.listaAmbulantes.place(relx=0, rely=0.1,relwidth=0.98, relheight=0.95)
 
     # ======= MENU SUPERIOR =======
     def menu(self):
@@ -404,5 +450,5 @@ class View(Controle):
         # MENU 03 - RELATÓRIOS
 
 if __name__ == '__main__':
-    LoginView()
+    #LoginView()
     View()
