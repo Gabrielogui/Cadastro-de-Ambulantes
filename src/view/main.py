@@ -53,8 +53,56 @@ class View(Controle):
         - ESCOLHA DAS ATIVIDADES
         - NÚMERO DE CADASTRADOS - TOTAL E POR ATIVIDADE
         '''
-        pass
-    
+        # ======= LOGO =======
+        self.logo = tk.Label(self.frame_01, text='LOGO')
+        self.logo.place(relx=0.05, rely=0.01, relwidth=0.9, relheight=0.1)
+
+        # ======= USUÁRIO LOGADO =======
+        nome = 'nome do usuário'
+        self.nome_logado = tk.Label(self.frame_01, text=f'OI, {nome}')
+        self.nome_logado.place(relx=0.05, rely=0.13, relwidth=0.9, relheight=0.05)
+
+        # ======= OPÇÃO DE DESLOGAR =======
+        self.deslogar = tk.Button(self.frame_01, text='Deslogar', bd=2, bg='#3e557a', fg='white', font=('verdano', 0, 'bold'))
+        self.deslogar.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.05)
+
+        # ======= ESCOLHA DAS ATIVIDADES =======
+        self.opcoes_atividades = ['Ambulante', 'Barraqueiro', 'Carrinho de Alimentação', 'Baiana de Acarajé', 'Baleiro']
+        self.atividade_selecao = tk.StringVar(self.frame_01)
+        self.atividade_selecao.set('Escolha') # Pode colocar também a primeira opção 'self.opcoes_atividades[0]'
+
+        self.lb_atividades = tk.Label(self.frame_01, text='Atividades', bg='#dfe3ee')
+        self.lb_atividades.place(relx=0.05, rely=0.28)
+
+        self.atividade_optionMenu = tk.OptionMenu(self.frame_01, self.atividade_selecao, *self.opcoes_atividades, command=self.frame02_atualizaAjudante)
+        #self.atividade_optionMenu.bind('<1>', lambda e: self.atividade_selecao.set(self.opcoes_atividades[0]))
+        self.atividade_optionMenu.place(relx=0.05, rely=0.3)
+
+        # ======= NÚMERO DE CADASTRADOS POR ATIVIDADE/TOTAL =======
+        # TOTAL:
+        self.totalCadastrados = tk.Label(self.frame_01, text='Nº Total')
+        self.totalCadastrados.place(relx=0.05, rely=0.6)
+
+        # AMBULANTE:
+        self.totalCadastrados_Ambulante = tk.Label(self.frame_01, text='Nº Ambulante')
+        self.totalCadastrados_Ambulante.place(relx=0.05, rely=0.64)
+
+        # BARRAQUEIRO
+        self.totalCadastrados_Barraqueiro = tk.Label(self.frame_01, text='Nº Barraqueiro')
+        self.totalCadastrados_Barraqueiro.place(relx=0.05, rely=0.68)
+
+        # CARRINHO DE ALIMENTAÇÃO:
+        self.totalCadastrados_CarrinhoDeAlimentacao = tk.Label(self.frame_01, text='Nº Carrinho')
+        self.totalCadastrados_CarrinhoDeAlimentacao.place(relx=0.05, rely=0.72)
+
+        # BAIANA DE ACARAJÉ:
+        self.totalCadastrados_BaianaDeAcaraje = tk.Label(self.frame_01, text='Nº Baiana')
+        self.totalCadastrados_BaianaDeAcaraje.place(relx=0.05, rely=0.76)
+
+        # BALEIRO
+        self.totalCadastrados_Baleiro = tk.Label(self.frame_01, text='Nº Baleiro')
+        self.totalCadastrados_Baleiro.place(relx=0.05, rely=0.8)
+
     # ======= FRAME 02 (WIDGETS DO CADASTRO) =======
     def frame02(self):
         # ======= BOTÕES =======
@@ -165,8 +213,8 @@ class View(Controle):
         self.dataNascimento_entry.place(relx=0.22, rely=0.3, relwidth=0.09)
 
         # LABEL E LISTA DE OPÇÕES DA ATIVIDADE: (AMBULANTE, BARRAQUEIRO, CARRINHO DE ALIMENTAÇÃO, BAIANAS DE ACARAJÉ E BALEIROS)  
-        # OPÇÕES - 
-        self.opcoes_atividades = ['Ambulante', 'Barraqueiro', 'Carrinho de Alimentação', 'Baiana de Acarajé', 'Baleiro']
+        # OPÇÕES - FOI PARA O FRAME 01
+        '''self.opcoes_atividades = ['Ambulante', 'Barraqueiro', 'Carrinho de Alimentação', 'Baiana de Acarajé', 'Baleiro']
         self.atividade_selecao = tk.StringVar(self.frame_02)
         self.atividade_selecao.set('Escolha') # Pode colocar também a primeira opção 'self.opcoes_atividades[0]'
 
@@ -175,7 +223,7 @@ class View(Controle):
 
         self.atividade_optionMenu = tk.OptionMenu(self.frame_02, self.atividade_selecao, *self.opcoes_atividades, command=self.frame02_atualizaAjudante)
         #self.atividade_optionMenu.bind('<1>', lambda e: self.atividade_selecao.set(self.opcoes_atividades[0]))
-        self.atividade_optionMenu.place(relx=0.32, rely=0.3)
+        self.atividade_optionMenu.place(relx=0.32, rely=0.3)'''
 
         # LABEL E LISTA DE OPÇÕES DA RAÇA (BRANCA, PRETA, PARDA, INDÍGENA E AMARELA)
         self.opcoes_racas = ['Branca', 'Preta', 'Parda', 'Indígena', 'Amarela']
