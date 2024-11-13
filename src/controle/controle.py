@@ -74,27 +74,27 @@ class Controle():
 
     # |=======| MÉTODOS 'CRUD' |=======|
     # ======= MÉTODO DE CADASTRAR O AMBULANTE =======
-    def cadastrarAmbulante():
+    def cadastrarAmbulante(self):
         pass
 
     # ======= MÉTODO DE VISUALIZAR O AMBULANTE NA LISTA (FRAME 03) - TREEVIEW =======
-    def visualizarListaAmbulante():
+    def visualizarListaAmbulante(self):
         pass
 
     # ======= MÉTODO DE REMOVER O AMBULANTE =======
-    def removerAmbulante():
+    def removerAmbulante(self):
         pass
 
     # ======= METODO PARA ATUALIZAR O AMBULANTE =======
-    def atualizarAmbulante():
+    def atualizarAmbulante(self):
         pass
     
     # ======= MÉTODO PARA PEGAR O AMBULANTE E SUBI-LO AO FRAME 02 QUANDO FOR CLICADO 2X =======
-    def onDoubleClick():
+    def onDoubleClick(self):
         pass
 
     # ======= MÉTODO DE BUSCA DO AMBULANTE(NOME, CPF, ID) =======
-    def buscarAmbulante():
+    def buscarAmbulante(self):
         pass
 
 
