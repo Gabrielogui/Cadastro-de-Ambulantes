@@ -4,9 +4,9 @@ from datetime import datetime
 # |=======| CLASSE AMBULANTE |=======|
 class Ambulante():
     # ======= CONSTRUTOR =======
-    def __init__(self, id, nome, cpf, rg, email, telefone, cep, cidade, bairro, rua, atividade, data_nascimento, 
+    def __init__(self, nome, cpf, rg, email, telefone, cep, cidade, bairro, rua, atividade, data_nascimento, 
                  nome_mae, raca, genero, deficiencia, escolaridade, trabalha, faixa_salarial):
-        self.id              = id
+        self.id              = None
         self.nome            = nome
         self.cpf             = cpf
         self.rg              = rg
@@ -103,13 +103,13 @@ class Ambulante():
 # |=======| CLASSE AJUDANTE |=======|
 class Ajudante():
     # ======= CONSTRUTOR =======
-    def __init__(self, nome_ajudante, cpf_ajudante, dataNascimeto):
+    def __init__(self, nome_ajudante, cpf_ajudante, dataNascimeto, idAmbulante):
         self.nome_ajudante  = nome_ajudante
         self.cpf_ajudante   = cpf_ajudante
         self.dataNascimento = dataNascimeto
 
         # AMBULANTE VINCULADO
-        self.idAmbulante    = None
+        self.idAmbulante    = idAmbulante
 
     # ======= MÉTODOS =======
 

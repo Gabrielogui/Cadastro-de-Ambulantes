@@ -115,7 +115,7 @@ class View(Controle):
         self.bt_buscar.place(relx=0.171, rely=0.02, relwidth=0.05, relheight=0.1)
 
         # BOTÃO SALVAR
-        self.bt_salvar  = tk.Button(self.frame_02, text='Salvar', bd=2, bg='#3e557a', fg='white', font=('verdano', 0, 'bold'))
+        self.bt_salvar  = tk.Button(self.frame_02, text='Salvar', bd=2, bg='#3e557a', fg='white', font=('verdano', 0, 'bold'), command=self.cadastrarAmbulante)
         self.bt_salvar.place(relx=0.93, rely=0.88, relwidth=0.05, relheight=0.1)
 
         # BOTÃO ALTERAR
