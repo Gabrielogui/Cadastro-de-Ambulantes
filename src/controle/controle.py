@@ -206,8 +206,15 @@ class Controle():
         self.possuiTrabalhoSelecao    = self.possuiTrabalho_selecao.get()
         self.faixaSalarialSelecao     = self.faixaSalarial_selecao.get()
 
-        # TESTE:
+         # TESTE:
         print(self.atividadeSelecao, self.racaSelecao, self.generoSelecao, self.possuiDeficienciaSelecao, self.escolaridadeSelecao, self.possuiTrabalhoSelecao, self.faixaSalarialSelecao)
+
+        # QUANTIDADE DE AJUDANTE:
+        self.ajudanteSelecao = self.ajudante_selecao.get()
+
+        # TESTE:
+        print(self.ajudanteSelecao)
+       
 
     # ======= MÉTODO DE CADASTRAR O AMBULANTE =======
     def cadastrarAmbulante(self):
@@ -238,13 +245,27 @@ class Controle():
         
         # CONFERINDO SE O CPF/RG DO AMBULANTE JÁ FOI CADASTRADO
 
+        # CONFERINDO SE A DATA PASSADA É VÁLIDA:
+
         # CONFERINDO SE O AMBULANTE É MAIOR DE IDADE:
 
         if(ambulante.ConferirMaiorIdade() == False):
             messagebox.showinfo('Aviso!', f'O ambulante {self.nome} não é maior de idade')
             return
 
-        # CONFERÊNCIA DOS AJUDATES:
+        # CONFERÊNCIA DOS AJUDATES: - CONTINUAR
+        if(self.ajudanteSelecao == 0):
+            pass
+        elif(self.ajudanteSelecao == 1):
+            pass
+        elif(self.ajudanteSelecao == 2):
+            pass
+        elif(self.ajudanteSelecao == 3):
+            pass
+        else:
+            messagebox.showerror('ERRO', 'Foi passado mais de 3 ajudantes')
+            return
+
         
     # ======= MÉTODO DE VISUALIZAR O AMBULANTE NA LISTA (FRAME 03) - TREEVIEW =======
     def visualizarListaAmbulante(self):
