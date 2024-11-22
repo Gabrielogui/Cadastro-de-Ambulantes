@@ -82,6 +82,13 @@ class Ambulante():
         # Define o formato de data brasileira (dd/mm/aaaa)
         formato_data = "%d/%m/%Y"
         
+        # CONFERIR SE FOI ENVIADO LETRA OU NÚMERO - FAZER
+
+        print(len(self.data_nascimento))
+
+        if(len(self.data_nascimento) != 10):
+                return False
+
         # Converte a data de nascimento do formato string para um objeto datetime
         data_nascimento = datetime.strptime(self.data_nascimento, formato_data)
         

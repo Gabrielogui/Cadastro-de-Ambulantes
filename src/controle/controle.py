@@ -73,6 +73,109 @@ class Controle():
         print('Banco de dados Criado!')
         self.desconecta_bd()
 
+    # |=======| FORMATAÇÃO DOS ENTRYS |=======|
+    # ======= FORMATAÇÃO DO CPF =======
+    def formatarCPF(self, event):
+
+        # Tirando sinais, deixando só os números e limite de 11 caracteres
+        self.cpf = self.cpf_entry.get().replace(".", "").replace("-", "")[:11] 
+        novo_Texto = ""
+
+        # Conferindo se a tecla "backspace" (Espaço) foi apertada
+        if event.keysym.lower() == "backspace": 
+            return
+        
+        # Conferido se os digitos do CPF são números e adicionando no texto o '.' e o '-'
+        for i in range(len(self.cpf)):
+            if(not self.cpf[i] in '0123456789'):
+                continue
+            if(i in [2, 5]):
+                novo_Texto += self.cpf[i] + '.'
+            elif(i in [8]):
+                novo_Texto += self.cpf[i] + '-'
+            else:
+                novo_Texto += self.cpf[i]
+
+        self.cpf_entry.delete(0, 'end')
+        self.cpf_entry.insert(0, novo_Texto)
+
+    # ======= FORATAÇÃO DO TELEFONE =======
+    def formatarTelefone(self, event):
+
+        # TIRANDO SINAIS(COM EXCEÇÃO DE '()', '-' e ' '), DEIXANDO SÓ OS NÚMEROS E MARCANDO O LIMITE DO CARACTER
+        self.telefone = self.telefone_entry.get().replace("(", "").replace(')', "").replace("-", '').replace(' ', '')[:11]
+        novo_Texto = '('
+
+        # Conferindo se a tecla "backspace" (Espaço) foi apertada
+        if event.keysym.lower() == "backspace": 
+            return
+        
+        # Conferido se os digitos do telefone são números e adicionando no Texto o '()' e o '-'
+        for i in range(len(self.telefone)):
+            if(not self.telefone[i] in '0123456789'):
+                continue
+            if(i in [1]):
+                novo_Texto += self.telefone[i] + ') '
+            elif(i in [2]):
+                novo_Texto += self.telefone[i] + ' '
+            elif(i in [6]):
+                novo_Texto += self.telefone[i] + '-'
+            else:
+                novo_Texto += self.telefone[i]
+
+        self.telefone_entry.delete(0, 'end')
+        self.telefone_entry.insert(0, novo_Texto)
+
+    # ======= FORMATAÇÃO DO RG =======
+    def formatarRG(self, event):
+        pass
+
+    # ======= FORMATAÇÃO DO CEP =======
+    def formatarCEP(self, event):
+        
+        # TIRANDO OS SINAIS(COM EXCEÇÃO DE '-') E COLOCANDO LIMITE DE 8 CHARS
+        self.cep = self.cep_entry.get().replace('-', '')[:8]
+
+        novo_Texto = ""
+
+        # Conferindo se a tecla "backspace" (Espaço) foi apertada
+        if event.keysym.lower() == "backspace": 
+            return
+        
+        for i in range(len(self.cep)):
+            if(not self.cep[i] in '0123456789'):
+                continue
+            if(i in [4]):
+                novo_Texto += self.cep[i] + '-'
+            else:
+                novo_Texto += self.cep[i]
+
+        self.cep_entry.delete(0, 'end')
+        self.cep_entry.insert(0, novo_Texto)
+
+
+    # ======= FORMATAÇÃO DA DATA DE NASCIMENTO =======
+    def formatarDataNascimento(self, event):
+        # TIRANDO OS SINAIS(COM EXCEÇÃO DE '/') E COLOCANDO LIMITE DE 8 CHARS
+        self.dataNascimento = self.dataNascimento_entry.get().replace('/', '')[:8]
+
+        novo_Texto = ""
+
+        # Conferindo se a tecla "backspace" (Espaço) foi apertada
+        if event.keysym.lower() == "backspace": 
+            return
+        
+        for i in range(len(self.dataNascimento)):
+            if(not self.dataNascimento[i] in '0123456789'):
+                continue
+            if(i in [1, 3]):
+                novo_Texto += self.dataNascimento[i] + '/'
+            else:
+                novo_Texto += self.dataNascimento[i]
+
+        self.dataNascimento_entry.delete(0, 'end')
+        self.dataNascimento_entry.insert(0, novo_Texto)
+
     # |=======| MÉTODOS 'CRUD' |=======|
     # ======= MÉTODO PARA PEGAR TODOS OS ENTRYS =======
     def pegandoEntrysAmbulante(self):
@@ -88,7 +191,8 @@ class Controle():
         self.bairro         = self.bairro_entry.get()
         self.rua            = self.rua_entry.get()
         self.nomeMae        = self.nomeMae_entry.get()
-        self.dataNascimento = self.dataNascimento_entry.get()
+        #self.dataNascimento = self.dataNascimento_entry.get()
+        self.dataNascimento = self.dataNascimento_calendario.get()
 
         # TESTE:
         print(self.id, self.nome, self.cpf, self.rg, self.email, self.telefone, self.cep, self.cidade, self.bairro, self.rua, self.nomeMae, self.dataNascimento)

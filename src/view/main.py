@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+from tkcalendar import DateEntry
 
 from src.controle.controle import Controle
 from src.modelo.Ambulante import Ambulante
@@ -146,6 +147,7 @@ class View(Controle):
         self.lb_cpf.place(relx=0.22, rely=0.15)
 
         self.cpf_entry = tk.Entry(self.frame_02)
+        self.cpf_entry.bind('<KeyRelease>', self.formatarCPF)
         self.cpf_entry.place(relx=0.22, rely=0.2, relwidth=0.09)
 
         # LABEL E ENTRY DO RG: - FORMATAR
@@ -160,6 +162,7 @@ class View(Controle):
         self.lb_telefone.place(relx=0.42, rely=0.15)
 
         self.telefone_entry = tk.Entry(self.frame_02)
+        self.telefone_entry.bind('<KeyRelease>', self.formatarTelefone)
         self.telefone_entry.place(relx=0.42, rely=0.2, relwidth=0.09)
 
         # LABEL E ENTRY DO EMAIL:
@@ -175,6 +178,7 @@ class View(Controle):
         self.lb_cep.place(relx=0.65, rely=0.15)
 
         self.cep_entry = tk.Entry(self.frame_02)
+        self.cep_entry.bind('<KeyRelease>', self.formatarCEP)
         self.cep_entry.place(relx=0.65, rely=0.2, relwidth=0.08)
 
         # CIDADE - TRANSFORMAR ENTRY EM LABEL APÓS VERIFICAÇÃO DO CEP
@@ -210,7 +214,11 @@ class View(Controle):
         self.lb_dataNascimento.place(relx=0.22, rely=0.25)
 
         self.dataNascimento_entry = tk.Entry(self.frame_02)
+        self.dataNascimento_entry.bind('<KeyRelease>', self.formatarDataNascimento)
         self.dataNascimento_entry.place(relx=0.22, rely=0.3, relwidth=0.09)
+
+        self.dataNascimento_calendario = DateEntry(self.frame_02, date_pattern="dd/mm/yyyy")
+        self.dataNascimento_calendario.place(relx=0.32, rely=0.3)
 
         # LABEL E LISTA DE OPÇÕES DA ATIVIDADE: (AMBULANTE, BARRAQUEIRO, CARRINHO DE ALIMENTAÇÃO, BAIANAS DE ACARAJÉ E BALEIROS)  
         # OPÇÕES - FOI PARA O FRAME 01

@@ -1,12 +1,15 @@
 import tkinter as tk
-from src.modelo.Ambulante import Ambulante
+#from src.modelo.Ambulante import Ambulante
 from tkinter import messagebox
+
+from tkcalendar import DateEntry
+
 
 # |=======| FUNÇÕES |=======|
 
 # ======= SALVAR OS DADOS ========
 def salvar_dados():
-    ambulante = Ambulante()
+    ambulante = None
 
     ambulante.nome = nome_entrada.get()
     ambulante.cpf  = cpf_entrada.get()
@@ -92,6 +95,10 @@ celular_entrada.grid(row=3, column=2, padx=30, pady=30)
 tk.Label(janela, text='Whatsapp').grid(row=3, column=3)
 whatsapp_entrada = tk.Entry(janela, width=30)
 whatsapp_entrada.grid(row=3, column=5, padx=30, pady=30)
+
+# Calendário:
+calendario = DateEntry(janela, date_pattern="dd/mm/yyyy")
+calendario.grid(row=4, column=5, padx=30 , pady=30)
 
 # |=======| LISTA DE OPÇÕES |=======|
 
