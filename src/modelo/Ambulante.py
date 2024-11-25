@@ -110,13 +110,13 @@ class Ambulante():
 # |=======| CLASSE AJUDANTE |=======|
 class Ajudante():
     # ======= CONSTRUTOR =======
-    def __init__(self, nome_ajudante, cpf_ajudante, dataNascimeto, idAmbulante):
+    def __init__(self, nome_ajudante, cpf_ajudante, dataNascimeto):
         self.nome_ajudante  = nome_ajudante
         self.cpf_ajudante   = cpf_ajudante
         self.dataNascimento = dataNascimeto
 
         # AMBULANTE VINCULADO
-        self.idAmbulante    = idAmbulante
+        #self.idAmbulante    = idAmbulante
 
     # ======= MÉTODOS =======
 

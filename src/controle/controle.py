@@ -177,7 +177,7 @@ class Controle():
         self.dataNascimento_entry.insert(0, novo_Texto)
 
     # |=======| MÉTODOS 'CRUD' |=======|
-    # ======= MÉTODO PARA PEGAR TODOS OS ENTRYS =======
+    # ======= MÉTODO PARA PEGAR TODOS OS ENTRYS DO AMBULANTE =======
     def pegandoEntrysAmbulante(self):
         # ENTRYS:
         self.id             = self.id_entry.get()
@@ -210,11 +210,70 @@ class Controle():
         print(self.atividadeSelecao, self.racaSelecao, self.generoSelecao, self.possuiDeficienciaSelecao, self.escolaridadeSelecao, self.possuiTrabalhoSelecao, self.faixaSalarialSelecao)
 
         # QUANTIDADE DE AJUDANTE:
-        self.ajudanteSelecao = self.ajudante_selecao.get()
+        if(self.atividadeSelecao == 'Escolha'):
+            self.ajudanteSelecao = 0
+        else:
+            self.ajudanteSelecao = int(self.ajudante_selecao.get())
 
         # TESTE:
         print(self.ajudanteSelecao)
        
+    # ======= MÉTODO PARA PEGAR TODOS OS ENTRYS DO AJUDANTE =======
+    def pegandoEntryAjudante(self):
+        # LISTA DE RETORNO:
+        listaAjudante = []
+
+        print(f'Nº ajudantes: {self.ajudanteSelecao}')
+
+        # CONDICIONAL DA QUANTIDADE DE AJUDANTES:
+        if(self.ajudanteSelecao == 0):
+            return
+        elif(self.ajudanteSelecao == 1):            
+            self.nomeAjudante01           = self.nomeAjudante01_entry.get()
+            self.cpfAjudante01            = self.cpfAjudante01_entry.get()
+            self.dataNascimentoAjudante01 = self.dataNascimentoAjudante01_entry.get()
+
+            ajudante01 = (self.nomeAjudante01, self.cpfAjudante01, self.dataNascimentoAjudante01)
+            listaAjudante.append(ajudante01)
+  
+        elif(self.ajudanteSelecao == 2):
+            self.nomeAjudante01           = self.nomeAjudante01_entry.get()
+            self.cpfAjudante01            = self.cpfAjudante01_entry.get()
+            self.dataNascimentoAjudante01 = self.dataNascimentoAjudante01_entry.get()
+
+            ajudante01 = (self.nomeAjudante01, self.cpfAjudante01, self.dataNascimentoAjudante01)
+            listaAjudante.append(ajudante01)
+
+            self.nomeAjudante02           = self.nomeAjudante02_entry.get()
+            self.cpfAjudante02            = self.cpfAjudante02_entry.get()
+            self.dataNascimentoAjudante02 = self.dataNascimentoAjudante02_entry.get()
+
+            ajudante02 = (self.nomeAjudante02, self.cpfAjudante02, self.dataNascimentoAjudante02)
+            listaAjudante.append(ajudante02)
+
+        elif(self.ajudanteSelecao == 3):
+            self.nomeAjudante01           = self.nomeAjudante01_entry.get()
+            self.cpfAjudante01            = self.cpfAjudante01_entry.get()
+            self.dataNascimentoAjudante01 = self.dataNascimentoAjudante01_entry.get()
+
+            ajudante01 = (self.nomeAjudante01, self.cpfAjudante01, self.dataNascimentoAjudante01)
+            listaAjudante.append(ajudante01)
+
+            self.nomeAjudante02           = self.nomeAjudante02_entry.get()
+            self.cpfAjudante02            = self.cpfAjudante02_entry.get()
+            self.dataNascimentoAjudante02 = self.dataNascimentoAjudante02_entry.get()
+
+            ajudante02 = (self.nomeAjudante02, self.cpfAjudante02, self.dataNascimentoAjudante02)
+            listaAjudante.append(ajudante02)
+
+            self.nomeAjudante03           = self.nomeAjudante03_entry.get()
+            self.cpfAjudante03            = self.cpfAjudante03_entry.get()
+            self.dataNascimentoAjudante03 = self.dataNascimentoAjudante03_entry.get()
+
+            ajudante03 = (self.nomeAjudante03, self.cpfAjudante03, self.dataNascimentoAjudante03)
+            listaAjudante.append(ajudante03)
+            
+        return listaAjudante
 
     # ======= MÉTODO DE CADASTRAR O AMBULANTE =======
     def cadastrarAmbulante(self):
@@ -254,18 +313,27 @@ class Controle():
             return
 
         # CONFERÊNCIA DOS AJUDATES: - CONTINUAR
-        if(self.ajudanteSelecao == 0):
-            pass
-        elif(self.ajudanteSelecao == 1):
-            pass
-        elif(self.ajudanteSelecao == 2):
-            pass
-        elif(self.ajudanteSelecao == 3):
-            pass
-        else:
-            messagebox.showerror('ERRO', 'Foi passado mais de 3 ajudantes')
-            return
 
+        # PEGANDO AJUDANTES:
+        listaAjudante = self.pegandoEntryAjudante()
+
+        print(listaAjudante)
+
+        listaAjudanteDTO = []
+        for ajudante in listaAjudante:
+            listaAjudanteDTO.append(Ajudante(ajudante[0], ajudante[1], ajudante[2]))
+                   
+        if(self.ajudanteSelecao not in [0, 1, 2, 3]):
+            messagebox.showerror('ERRO', f'Foi na passagem do nº de ajuantes')
+            return
+        
+        # CONFERIR SE TODOS OS CAMPOS FORAM PASSADOS:
+
+        # CONFERINDO SE CPF É VÁLIDO E SE JÁ FOI CADASTRADO:
+
+        # CONFERINDO SE A DATA PASSADA É VÁLIDA:
+
+        # CONFERIR SE É MAIOR DE IDADE:
         
     # ======= MÉTODO DE VISUALIZAR O AMBULANTE NA LISTA (FRAME 03) - TREEVIEW =======
     def visualizarListaAmbulante(self):
