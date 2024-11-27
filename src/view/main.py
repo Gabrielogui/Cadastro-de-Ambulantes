@@ -21,6 +21,8 @@ class View(Controle):
         self.frame01()
         self.frame02()
         self.frame03()
+        self.montar_tabelas()
+        self.visualizarListaAmbulante()
         self.janela.mainloop()
 
     # ======= PRINCIPAIS CONFIGURAÇÕES DA TELA =======
@@ -451,8 +453,8 @@ class View(Controle):
         self.listaAmbulantes.heading('#2', text='Nome')
         self.listaAmbulantes.heading('#3', text='CPF')
         self.listaAmbulantes.heading('#4', text='RG')
-        self.listaAmbulantes.heading('#5', text='Telefone')
-        self.listaAmbulantes.heading('#6', text='Email')
+        self.listaAmbulantes.heading('#5', text='Email')
+        self.listaAmbulantes.heading('#6', text='Telefone')
         self.listaAmbulantes.heading('#7', text='CEP')
         self.listaAmbulantes.heading('#8', text='Cidade')
         self.listaAmbulantes.heading('#9', text='Bairro')

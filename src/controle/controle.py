@@ -38,7 +38,7 @@ class Controle():
 
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS ambulante(
-                id INTEGER PRIMARY KEY,
+                id INTEGER PRIMARY KEY NOT NULL,
                 nome char(50) NOT NULL,
                 cpf char(11) NOT NULL,
                 rg char(10) NOT NULL,
@@ -59,13 +59,16 @@ class Controle():
                 faixa_salarial char(10),
                 hora_atualizacao date
             )
-                            
+        ''')
+
+        self.cursor.execute('''                               
             CREATE TABLE IF NOT EXISTS ajudante(
                 id_ajudante INTEGER PRIMARY KEY NOT NULL,
                 nome_ajudante char(50) NOT NULL,
                 cpf_ajudante char(11) NOT NULL,
                 data_nascimento date NOT NULL,
-                id_ambulante INTEGER FOREIGN KEY NOT NULL
+                id_ambulante INTEGER NOT NULL,
+                FOREIGN KEY (id_ambulante) REFERENCES ambulante(id)
             )
         ''')
 
@@ -290,6 +293,8 @@ class Controle():
             messagebox.showinfo('Aviso!', 'Deve-se escolher todas as seleções!')
             return
         
+        # CONFERIR SE AINDA HÁ VAGAS DISPONÍVEIS
+
         # CRIANDO OS OBJETOS AMBULANTE/AJUDANTE: - (TERMINAR AJUDANTE)
         ambulante = Ambulante(self.nome, self.cpf, self.rg, self.email, self.telefone, self.cep, self.cidade, self.bairro, 
                               self.rua, self.nomeMae, self.dataNascimento, self.atividadeSelecao, self.racaSelecao, 
@@ -312,12 +317,30 @@ class Controle():
             messagebox.showinfo('Aviso!', f'O ambulante {self.nome} não é maior de idade')
             return
 
+        # ADICIONANDO NO BANCO DE DADOS - TESTAR
+        self.conecta_bd()
+
+        self.cursor.execute('''
+            INSERT INTO
+                ambulante (
+                nome, cpf, rg, email, telefone, cep, cidade, bairro, rua, atividade, data_nascimento, 
+                nome_mae, raca, genero, deficiencia, escolaridade, trabalha, faixa_salarial)
+            VALUES
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (ambulante.nome, ambulante.cpf, ambulante.rg, ambulante.email, ambulante.telefone, ambulante.cep, ambulante.cidade, 
+              ambulante.bairro, ambulante.rua, ambulante.atividade, ambulante.data_nascimento, ambulante.nome_mae, ambulante.raca, 
+              ambulante.genero, ambulante.deficiencia, ambulante.escolaridade, ambulante.trabalha, ambulante.faixa_salarial)
+        )
+
+        self.conn.commit()
+        self.desconecta_bd()
+
+        self.visualizarListaAmbulante()
+
         # CONFERÊNCIA DOS AJUDATES: - CONTINUAR
 
         # PEGANDO AJUDANTES:
         listaAjudante = self.pegandoEntryAjudante()
-
-        print(listaAjudante)
 
         listaAjudanteDTO = []
         for ajudante in listaAjudante:
@@ -327,6 +350,8 @@ class Controle():
             messagebox.showerror('ERRO', f'Foi na passagem do nº de ajuantes')
             return
         
+        ambulante.ajudantes = listaAjudanteDTO
+
         # CONFERIR SE TODOS OS CAMPOS FORAM PASSADOS:
 
         # CONFERINDO SE CPF É VÁLIDO E SE JÁ FOI CADASTRADO:
@@ -337,7 +362,39 @@ class Controle():
         
     # ======= MÉTODO DE VISUALIZAR O AMBULANTE NA LISTA (FRAME 03) - TREEVIEW =======
     def visualizarListaAmbulante(self):
-        pass
+        self.listaAmbulantes.delete(*self.listaAmbulantes.get_children())
+
+        self.conecta_bd()
+
+        lista = self.cursor.execute('''
+            SELECT 
+                id, nome, cpf, rg, email, telefone, cep, cidade, bairro, rua, atividade, 
+                nome_mae, raca
+            FROM ambulante
+            ORDER BY id;
+        ''')
+
+        '''
+        self.listaAmbulantes.heading('#2', text='Nome')
+        self.listaAmbulantes.heading('#3', text='CPF')
+        self.listaAmbulantes.heading('#4', text='RG')
+        self.listaAmbulantes.heading('#5', text='Telefone')
+        self.listaAmbulantes.heading('#6', text='Email')
+        self.listaAmbulantes.heading('#7', text='CEP')
+        self.listaAmbulantes.heading('#8', text='Cidade')
+        self.listaAmbulantes.heading('#9', text='Bairro')
+        self.listaAmbulantes.heading('#10', text='Rua')
+        self.listaAmbulantes.heading('#11', text='Nome da mãe')
+        self.listaAmbulantes.heading('#12', text='Atividade')
+        self.listaAmbulantes.heading('#13', text='Raça')
+        '''
+
+        for ambulante in lista:
+            self.listaAmbulantes.insert('', tk.END, values=ambulante)
+
+        self.conn.commit()
+        self.desconecta_bd
+
 
     # ======= MÉTODO DE REMOVER O AMBULANTE =======
     def removerAmbulante(self):

@@ -115,7 +115,7 @@ class Ajudante():
         self.cpf_ajudante   = cpf_ajudante
         self.dataNascimento = dataNascimeto
 
-        # AMBULANTE VINCULADO
+        # AMBULANTE VINCULADO - CONTINUAR DEPOIS
         #self.idAmbulante    = idAmbulante
 
     # ======= MÉTODOS =======
