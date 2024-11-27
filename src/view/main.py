@@ -81,7 +81,7 @@ class View(Controle):
         #self.atividade_optionMenu.bind('<1>', lambda e: self.atividade_selecao.set(self.opcoes_atividades[0]))
         self.atividade_optionMenu.place(relx=0.05, rely=0.3)
 
-        # ======= NÚMERO DE CADASTRADOS POR ATIVIDADE/TOTAL =======
+        # ======= NÚMERO DE CADASTRADOS POR ATIVIDADE/TOTAL ======= ADD AS VARiÁVEIS
         # TOTAL:
         self.totalCadastrados = tk.Label(self.frame_01, text='Nº Total')
         self.totalCadastrados.place(relx=0.05, rely=0.6)
@@ -481,6 +481,9 @@ class View(Controle):
 
         # POSICIONANDO A LISTA - TREEVIEW
         self.listaAmbulantes.place(relx=0, rely=0.1,relwidth=0.98, relheight=0.95)
+
+        # ======= DOUBLE CLICK =======
+        self.listaAmbulantes.bind('<Double-1>', self.onDoubleClick)
 
     # ======= MENU SUPERIOR =======
     def menu(self):

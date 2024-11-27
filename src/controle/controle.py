@@ -8,6 +8,7 @@ from src.modelo.Ambulante import *
 class Controle():
     # ======= MÉTODO LIMPAR TELA (LIMPA OS ENTRYS DO FRAME 02) =======
     def limpa_tela(self):
+        # ENTRYS:
         self.id_entry.delete(0, tk.END)
         self.nome_entry.delete(0, tk.END)
         self.cpf_entry.delete(0, tk.END)
@@ -20,7 +21,17 @@ class Controle():
         self.rua_entry.delete(0, tk.END)
         self.nomeMae_entry.delete(0, tk.END)
         self.dataNascimento_entry.delete(0, tk.END)
-        
+        self.dataNascimento_calendario.delete(0, tk.END)
+
+        # OPTIONS MENU:
+        self.atividade_selecao.set('Escolha')
+        self.raca_selecao.set('Escolha a raca')
+        self.genero_selecao.set('Escolha o genero')
+        self.possuiDeficiencia_selecao.set(self.opcoes_possuiDeficiencia[0])
+        self.escolaridade_selecao.set('Escolha')
+        self.possuiTrabalho_selecao.set(self.opcoes_possuiTrabalho[0])
+        self.faixaSalarial_selecao.set('Escolha')
+
     # ======= CONECTANDO COM O BANCO DE DADOS =======
     def conecta_bd(self):
         self.conn = sqlite3.connect('cadastro_ambulante.bd')
@@ -308,6 +319,15 @@ class Controle():
             return
         
         # CONFERINDO SE O CPF/RG DO AMBULANTE JÁ FOI CADASTRADO
+        lista = self.cursor.execute('''SELECT cpf, rg FROM ambulante''')
+
+        for elemento in lista:
+            if(elemento[0] == ambulante.cpf):
+                messagebox.showinfo('Aviso!' f'O CPF do ambulante {ambulante.nome} passado já foi cadastrado!')
+                return
+            elif(elemento[1] == ambulante.rg):
+                messagebox.showinfo('Aviso!' f'O CPF do ambulante {ambulante.nome} passado já foi cadastrado!')
+                return
 
         # CONFERINDO SE A DATA PASSADA É VÁLIDA:
 
@@ -330,8 +350,8 @@ class Controle():
         ''', (ambulante.nome, ambulante.cpf, ambulante.rg, ambulante.email, ambulante.telefone, ambulante.cep, ambulante.cidade, 
               ambulante.bairro, ambulante.rua, ambulante.atividade, ambulante.data_nascimento, ambulante.nome_mae, ambulante.raca, 
               ambulante.genero, ambulante.deficiencia, ambulante.escolaridade, ambulante.trabalha, ambulante.faixa_salarial)
-        )
-
+        ) # Adicionar o número de ajudantes
+ 
         self.conn.commit()
         self.desconecta_bd()
 
@@ -393,7 +413,7 @@ class Controle():
             self.listaAmbulantes.insert('', tk.END, values=ambulante)
 
         self.conn.commit()
-        self.desconecta_bd
+        self.desconecta_bd()
 
 
     # ======= MÉTODO DE REMOVER O AMBULANTE =======
@@ -405,8 +425,49 @@ class Controle():
         pass
     
     # ======= MÉTODO PARA PEGAR O AMBULANTE E SUBI-LO AO FRAME 02 QUANDO FOR CLICADO 2X =======
-    def onDoubleClick(self):
-        pass
+    def onDoubleClick(self, event):
+        self.limpa_tela()
+        self.listaAmbulantes.selection()
+
+        for n in self.listaAmbulantes.selection():
+            col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12, col13 = self.listaAmbulantes.item(n, 'values')
+
+        idAmbulante = col1
+
+        self.conecta_bd()
+
+        self.cursor.execute('''
+            SELECT 
+                id, nome, cpf, rg, email, telefone, cep, cidade, bairro, rua, atividade, data_nascimento, 
+                nome_mae, raca, genero, deficiencia, escolaridade, trabalha, faixa_salarial
+            FROM ambulante
+            WHERE id = (?)
+        ''', (idAmbulante))        
+
+        lista = self.cursor.fetchone()
+
+        self.conn.commit()
+        self.desconecta_bd()
+
+        self.id_entry.insert(tk.END, lista[0])
+        self.nome_entry.insert(tk.END, lista[1])
+        self.cpf_entry.insert(tk.END, lista[2])
+        self.rg_entry.insert(tk.END, lista[3])
+        self.email_entry.insert(tk.END, lista[4])
+        self.telefone_entry.insert(tk.END, lista[5])
+        self.cep_entry.insert(tk.END, lista[6])
+        self.cidade_entry.insert(tk.END, lista[7])
+        self.bairro_entry.insert(tk.END, lista[8])
+        self.rua_entry.insert(tk.END, lista[9])
+        self.nomeMae_entry.insert(tk.END, lista[10])
+        self.dataNascimento_calendario.insert(tk.END, lista[11])
+        self.atividade_selecao.set(lista[12])
+        self.raca_selecao.set(lista[13])
+        self.genero_selecao.set(lista[14])
+        self.possuiDeficiencia_selecao.set(lista[14])
+        self.escolaridade_selecao.set(lista[14])
+        self.possuiTrabalho_selecao.set(lista[14])
+        self.faixaSalarial_selecao.set(lista[14])
 
     # ======= MÉTODO DE BUSCA DO AMBULANTE(NOME, CPF, ID) =======
     def buscarAmbulante(self):
