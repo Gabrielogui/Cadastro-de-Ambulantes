@@ -418,7 +418,20 @@ class Controle():
 
     # ======= MÉTODO DE REMOVER O AMBULANTE =======
     def removerAmbulante(self):
-        pass
+        self.pegandoEntrysAmbulante() # PEGAR ID
+
+        self.conecta_bd()
+
+        self.cursor.execute('''
+            DELETE from ambulante
+            where id = (?)
+        ''', (self.id))
+
+        self.conn.commit()
+        self.desconecta_bd()
+
+        self.visualizarListaAmbulante()
+        self.limpa_tela()
 
     # ======= METODO PARA ATUALIZAR O AMBULANTE =======
     def atualizarAmbulante(self):
@@ -464,10 +477,10 @@ class Controle():
         self.atividade_selecao.set(lista[12])
         self.raca_selecao.set(lista[13])
         self.genero_selecao.set(lista[14])
-        self.possuiDeficiencia_selecao.set(lista[14])
-        self.escolaridade_selecao.set(lista[14])
-        self.possuiTrabalho_selecao.set(lista[14])
-        self.faixaSalarial_selecao.set(lista[14])
+        self.possuiDeficiencia_selecao.set(lista[15])
+        self.escolaridade_selecao.set(lista[16])
+        self.possuiTrabalho_selecao.set(lista[17])
+        self.faixaSalarial_selecao.set(lista[18])
 
     # ======= MÉTODO DE BUSCA DO AMBULANTE(NOME, CPF, ID) =======
     def buscarAmbulante(self):

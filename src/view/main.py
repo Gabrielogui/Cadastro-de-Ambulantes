@@ -126,7 +126,7 @@ class View(Controle):
         self.bt_alterar.place(relx=0.3, rely=0.02, relwidth=0.05, relheight=0.1)
 
         # BOTÃO APAGAR
-        self.bt_apagar  = tk.Button(self.frame_02, text='Apagar', bd=2, bg='#ab2e4b', fg='white', font=('verdano', 0, 'bold'))
+        self.bt_apagar  = tk.Button(self.frame_02, text='Apagar', bd=2, bg='#ab2e4b', fg='white', font=('verdano', 0, 'bold'), command=self.removerAmbulante)
         self.bt_apagar.place(relx=0.351, rely=0.02, relwidth=0.05, relheight=0.1)
 
         # ======= LABELS, ENTRY E LISTA DE OPÇÕES DOS AMBULANTES =======
