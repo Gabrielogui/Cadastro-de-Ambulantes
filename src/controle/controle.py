@@ -8,8 +8,11 @@ from src.modelo.Ambulante import *
 class Controle():
     # ======= MÉTODO LIMPAR TELA (LIMPA OS ENTRYS DO FRAME 02) =======
     def limpa_tela(self):
+        # ID:
+        self.id = ''
+        self.id_entry.config(text=f'{self.id}')
+
         # ENTRYS:
-        self.id_entry.delete(0, tk.END)
         self.nome_entry.delete(0, tk.END)
         self.cpf_entry.delete(0, tk.END)
         self.rg_entry.delete(0, tk.END)
@@ -319,6 +322,8 @@ class Controle():
             return
         
         # CONFERINDO SE O CPF/RG DO AMBULANTE JÁ FOI CADASTRADO
+        self.conecta_bd()
+
         lista = self.cursor.execute('''SELECT cpf, rg FROM ambulante''')
 
         for elemento in lista:
@@ -328,6 +333,11 @@ class Controle():
             elif(elemento[1] == ambulante.rg):
                 messagebox.showinfo('Aviso!' f'O CPF do ambulante {ambulante.nome} passado já foi cadastrado!')
                 return
+
+        self.conn.commit()
+        self.desconecta_bd()
+
+        
 
         # CONFERINDO SE A DATA PASSADA É VÁLIDA:
 
@@ -418,14 +428,14 @@ class Controle():
 
     # ======= MÉTODO DE REMOVER O AMBULANTE =======
     def removerAmbulante(self):
-        self.pegandoEntrysAmbulante() # PEGAR ID
+        idDeletar = self.id_entry.cget("text") # PEGAR ID
 
         self.conecta_bd()
 
         self.cursor.execute('''
             DELETE from ambulante
             where id = (?)
-        ''', (self.id))
+        ''', (idDeletar))
 
         self.conn.commit()
         self.desconecta_bd()
@@ -462,7 +472,8 @@ class Controle():
         self.conn.commit()
         self.desconecta_bd()
 
-        self.id_entry.insert(tk.END, lista[0])
+        self.id = lista[0]
+        self.id_entry.config(text=f'{self.id}')
         self.nome_entry.insert(tk.END, lista[1])
         self.cpf_entry.insert(tk.END, lista[2])
         self.rg_entry.insert(tk.END, lista[3])

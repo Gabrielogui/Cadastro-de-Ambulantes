@@ -134,7 +134,9 @@ class View(Controle):
         self.lb_id = tk.Label(self.frame_02, text='Código', bg='#dfe3ee')
         self.lb_id.place(relx=0.01, rely=0.02)
 
-        self.id_entry = tk.Entry(self.frame_02) # IDEIA: COLOCAR COMO LABEL E UM BG WHITE, PARA FICAR NÃO EDITAVEL
+        self.id = ''
+
+        self.id_entry = tk.Label(self.frame_02, text=f'{self.id}', bg='white') # IDEIA: COLOCAR COMO LABEL E UM BG WHITE, PARA FICAR NÃO EDITAVEL
         self.id_entry.place(relx=0.01, rely=0.08, relwidth=0.035) 
 
         # LABEL E ENTRY DO NOME:
