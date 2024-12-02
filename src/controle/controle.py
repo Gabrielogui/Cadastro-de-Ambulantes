@@ -445,7 +445,24 @@ class Controle():
 
     # ======= METODO PARA ATUALIZAR O AMBULANTE =======
     def atualizarAmbulante(self):
-        pass
+        self.pegandoEntrysAmbulante()
+
+        idAtualizar = self.id_entry.cget("text") # PEGAR ID
+
+        # CONFERINDO SE O ID FOI ASSADO (DEU DOBLE CLICK)
+        if not idAtualizar:
+            messagebox.showinfo("Aviso!", "Não foi passado nenhum ID para atualizar!")
+            return
+        
+        # CONFERINDO SE USUÁRIO DEIXOU VAZIO ALGUMA SESSÃO
+        # NOME:
+        if(not self.nome):
+            self.cursor.execute(''' SELECT nome from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.nome = resultado[0]
+        
     
     # ======= MÉTODO PARA PEGAR O AMBULANTE E SUBI-LO AO FRAME 02 QUANDO FOR CLICADO 2X =======
     def onDoubleClick(self, event):
