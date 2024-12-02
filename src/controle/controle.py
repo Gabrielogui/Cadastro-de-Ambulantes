@@ -197,7 +197,7 @@ class Controle():
     # ======= MÉTODO PARA PEGAR TODOS OS ENTRYS DO AMBULANTE =======
     def pegandoEntrysAmbulante(self):
         # ENTRYS:
-        self.id             = self.id_entry.get()
+        #self.id             = self.id_entry.get()
         self.nome           = self.nome_entry.get()
         self.cpf            = self.cpf_entry.get()
         self.rg             = self.rg_entry.get()
@@ -608,7 +608,78 @@ class Controle():
         self.conn.commit()
         self.desconecta_bd()
 
+        # CONFERÊNCIAS PARA ATUALIZAR
+        # CONFERINDO SE CPF É VÁLIDO:
+        if(ambulante.ConferirCpf() == False):
+            messagebox.showinfo('Aviso!', f'O CPF do ambulante {ambulante.nome} passado foi inválido!')
+            return
+        
+        # CONFERINDO SE O CPF/RG DO AMBULANTE JÁ FOI CADASTRADO
+        self.conecta_bd()
 
+        lista = self.cursor.execute('''SELECT cpf, rg FROM ambulante
+                                       WHERE id != (?) ''', (idAtualizar))
+
+        for elemento in lista:
+            if(elemento[0] == ambulante.cpf):
+                messagebox.showinfo('Aviso!' f'O CPF do ambulante {ambulante.nome} passado já foi cadastrado!')
+                return
+            elif(elemento[1] == ambulante.rg):
+                messagebox.showinfo('Aviso!' f'O CPF do ambulante {ambulante.nome} passado já foi cadastrado!')
+                return
+
+        self.conn.commit()
+        self.desconecta_bd()
+
+
+        # CONFERINDO SE A DATA PASSADA É VÁLIDA:
+
+        # CONFERINDO SE O AMBULANTE É MAIOR DE IDADE:
+        if(ambulante.ConferirMaiorIdade() == False):
+            messagebox.showinfo('Aviso!', f'O ambulante {self.nome} não é maior de idade')
+            return
+        
+        self.conecta_bd()
+
+        self.cursor.execute(''' UPDATE ambulante
+                                SET nome = (?), cpf = (?), rg = (?), email = (?), telefone = (?), cep = (?), cidade = (?), bairro = (?), 
+                                    rua = (?), atividade = (?), data_nascimento = (?), nome_mae = (?), raca = (?), genero = (?), 
+                                    deficiencia = (?), escolaridade = (?), trabalha = (?), faixa_salarial = (?)
+                                WHERE id = (?)''', (ambulante.nome, ambulante.cpf, ambulante.rg, ambulante.email, ambulante.telefone, 
+                                                    ambulante.cidade, ambulante.cep, ambulante.bairro, ambulante.rua, ambulante.atividade, 
+                                                    ambulante.data_nascimento, ambulante.nome_mae, ambulante.raca, ambulante.genero, 
+                                                    ambulante.deficiencia, ambulante.escolaridade, ambulante.trabalha, ambulante.faixa_salarial,
+                                                    idAtualizar))
+        
+        
+        self.conn.commit()
+        self.desconecta_bd()
+
+        self.visualizarListaAmbulante()
+        self.limpa_tela()
+
+        # CONFERÊNCIA DOS AJUDATES: - CONTINUAR
+
+        # PEGANDO AJUDANTES:
+        '''listaAjudante = self.pegandoEntryAjudante()
+
+        listaAjudanteDTO = []
+        for ajudante in listaAjudante:
+            listaAjudanteDTO.append(Ajudante(ajudante[0], ajudante[1], ajudante[2]))
+                   
+        if(self.ajudanteSelecao not in [0, 1, 2, 3]):
+            messagebox.showerror('ERRO', f'Foi na passagem do nº de ajuantes')
+            return
+        
+        ambulante.ajudantes = listaAjudanteDTO'''
+
+        # CONFERIR SE TODOS OS CAMPOS FORAM PASSADOS:
+
+        # CONFERINDO SE CPF É VÁLIDO E SE JÁ FOI CADASTRADO:
+
+        # CONFERINDO SE A DATA PASSADA É VÁLIDA:
+
+        # CONFERIR SE É MAIOR DE IDADE:
         
     
     # ======= MÉTODO PARA PEGAR O AMBULANTE E SUBI-LO AO FRAME 02 QUANDO FOR CLICADO 2X =======

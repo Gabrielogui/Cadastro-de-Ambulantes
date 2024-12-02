@@ -122,7 +122,7 @@ class View(Controle):
         self.bt_salvar.place(relx=0.93, rely=0.88, relwidth=0.05, relheight=0.1)
 
         # BOTÃO ALTERAR
-        self.bt_alterar = tk.Button(self.frame_02, text='Alterar', bd=2, bg='#3e557a', fg='white', font=('verdano', 0, 'bold'))
+        self.bt_alterar = tk.Button(self.frame_02, text='Alterar', bd=2, bg='#3e557a', fg='white', font=('verdano', 0, 'bold'), command=self.atualizarAmbulante)
         self.bt_alterar.place(relx=0.3, rely=0.02, relwidth=0.05, relheight=0.1)
 
         # BOTÃO APAGAR
