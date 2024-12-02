@@ -454,6 +454,8 @@ class Controle():
             messagebox.showinfo("Aviso!", "Não foi passado nenhum ID para atualizar!")
             return
         
+        self.conecta_bd()
+
         # CONFERINDO SE USUÁRIO DEIXOU VAZIO ALGUMA SESSÃO
         # NOME:
         if(not self.nome):
@@ -462,6 +464,151 @@ class Controle():
             resultado = self.cursor.fetchone()
             if resultado:
                 self.nome = resultado[0]
+
+        # CPF:
+        if(not self.cpf):
+            self.cursor.execute(''' SELECT cpf from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.cpf = resultado[0]
+
+        # RG:
+        if(not self.rg):
+            self.cursor.execute(''' SELECT rg from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.rg = resultado[0]
+
+        # EMAIL:
+        if(not self.email):
+            self.cursor.execute(''' SELECT email from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.email = resultado[0]
+        
+        # TELEFONE:
+        if(not self.telefone):
+            self.cursor.execute(''' SELECT telefone from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.telefone = resultado[0]
+
+        # CEP:
+        if(not self.cep):
+            self.cursor.execute(''' SELECT cep from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.cep = resultado[0]
+
+        # CIDADE:
+        if(not self.cidade):
+            self.cursor.execute(''' SELECT cidade from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.cidade = resultado[0]
+
+        # BAIRRO:
+        if(not self.bairro):
+            self.cursor.execute(''' SELECT bairro from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.bairro = resultado[0]
+
+        # RUA:
+        if(not self.rua):
+            self.cursor.execute(''' SELECT rua from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.rua = resultado[0]
+
+        # ATIVIDADE:
+        if(not self.atividadeSelecao):
+            self.cursor.execute(''' SELECT atividade from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.atividadeSelecao = resultado[0]
+
+        # DATA DE NASCIMENTO:
+        if(not self.dataNascimento):
+            self.cursor.execute(''' SELECT data_nascimento from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.dataNascimento = resultado[0]
+
+        # NOME DA MÃE:
+        if(not self.nomeMae):
+            self.cursor.execute(''' SELECT nome_mae from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.nomeMae = resultado[0]
+
+        # RAÇA:
+        if(not self.racaSelecao):
+            self.cursor.execute(''' SELECT raca from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.racaSelecao = resultado[0]
+
+        # GÊNERO
+        if(not self.generoSelecao):
+            self.cursor.execute(''' SELECT genero from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.generoSelecao = resultado[0]
+
+        # DEFICIÊNCIA
+        if(not self.possuiDeficienciaSelecao):
+            self.cursor.execute(''' SELECT deficiencia from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.possuiDeficienciaSelecao = resultado[0]
+
+        # ESCOLARIDADE
+        if(not self.escolaridadeSelecao):
+            self.cursor.execute(''' SELECT escolaridade from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.escolaridadeSelecao = resultado[0]
+
+        # TRABALHA:
+        if(not self.possuiTrabalhoSelecao):
+            self.cursor.execute(''' SELECT trabalho from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.possuiTrabalhoSelecao = resultado[0]
+
+        # FAIXA SALARIAL:
+        if(not self.faixaSalarialSelecao):
+            self.cursor.execute(''' SELECT faixa_salarial from ambulante
+                                where id = (?) ''', (idAtualizar))
+            resultado = self.cursor.fetchone()
+            if resultado:
+                self.faixaSalarialSelecao = resultado[0]
+
+        ambulante = Ambulante(self.nome, self.cpf, self.rg, self.email, self.telefone, self.cep, self.cidade, self.bairro, self.rua,
+                              self.atividadeSelecao, self.dataNascimento, self.nomeMae, self.racaSelecao, self.generoSelecao, 
+                              self.possuiDeficienciaSelecao, self.escolaridadeSelecao, self.possuiTrabalhoSelecao, self.faixaSalarialSelecao)
+
+        self.conn.commit()
+        self.desconecta_bd()
+
+
         
     
     # ======= MÉTODO PARA PEGAR O AMBULANTE E SUBI-LO AO FRAME 02 QUANDO FOR CLICADO 2X =======
