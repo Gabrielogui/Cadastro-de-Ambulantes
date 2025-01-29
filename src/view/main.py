@@ -83,7 +83,9 @@ class View(Controle):
 
         # ======= NÚMERO DE CADASTRADOS POR ATIVIDADE/TOTAL ======= ADD AS VARiÁVEIS
         # TOTAL:
-        self.totalCadastrados = tk.Label(self.frame_01, text='Nº Total')
+        self.qtdeCadastrados = self.totalAmbulante() # COMEÇAR COM A QUANTIDADE DE CADASTRADOS
+
+        self.totalCadastrados = tk.Label(self.frame_01, text=f'Nº Total: {self.qtdeCadastrados}')
         self.totalCadastrados.place(relx=0.05, rely=0.6)
 
         # AMBULANTE:

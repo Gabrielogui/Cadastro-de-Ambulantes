@@ -389,6 +389,12 @@ class Controle():
         # CONFERINDO SE A DATA PASSADA É VÁLIDA:
 
         # CONFERIR SE É MAIOR DE IDADE:
+
+
+        # ATUALIZANDO O TOTAL DE CADASTRADOS
+        self.qtdeCadastrados = self.totalAmbulante()
+        print(f'ADICIONANDO AMBULANTE {self.qtdeCadastrados} | {self.totalAmbulante()}')
+        self.totalCadastrados.config(text=f'[TESTE ADICIONAR]: {self.qtdeCadastrados}') 
         
     # ======= MÉTODO DE VISUALIZAR O AMBULANTE NA LISTA (FRAME 03) - TREEVIEW =======
     def visualizarListaAmbulante(self):
@@ -442,6 +448,11 @@ class Controle():
 
         self.visualizarListaAmbulante()
         self.limpa_tela()
+
+        # ATUALIZANDO O TOTAL DE CADASTRADOS
+        self.qtdeCadastrados = self.totalAmbulante()
+        print(self.qtdeCadastrados, self.totalAmbulante())
+        self.totalCadastrados.config(text=f'[TESTE DELETAR]: {self.qtdeCadastrados}') 
 
     # ======= METODO PARA ATUALIZAR O AMBULANTE =======
     def atualizarAmbulante(self):
@@ -732,4 +743,22 @@ class Controle():
     def buscarAmbulante(self):
         pass
 
+    # |=======| MÉTODOS DE CONTAGEM DE AMBULANTES |=======|
 
+    def totalAmbulante(self):
+
+        self.conecta_bd()
+
+        self.cursor.execute('''
+        SELECT count(*) FROM ambulante
+        ''')
+
+        qtdeAmbulantes = self.cursor.fetchone()
+
+        self.conn.commit()
+        self.desconecta_bd()
+
+        self.qtdeCadastrados = qtdeAmbulantes[0]
+
+        return self.qtdeCadastrados
+        
